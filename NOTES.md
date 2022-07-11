@@ -1,5 +1,6 @@
-# 01. Ideas
+### Virtual Art Museum 
 
+# 01. Ideas
     * what problem do I have in my everyday life that I would like to solve?
     * what am I passionate about?
         ** art
@@ -23,5 +24,11 @@ I want to create an app where you can search art using subject keywords. I want 
 * a user can see a list of results (DOMContentLoaded -- get)
 * A user can like art (click -- patch)
 
+form (commit) > submit event (commit) > list results (commit)
+
 # 05. stretch goals
 * Comments (submit -- post)
+
+# 06. to do
+1. create repo
+2. homepage
