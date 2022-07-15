@@ -9,20 +9,22 @@ Effect: render search home  page
 //NODE
 const mainDiv = () => document.getElementById("main")
 const searchArtLink = () => document.getElementById("search-art-link")
+const searchArtLink2 = () => document.getElementById("search-art-link-2")
 const homePageLink = () => document.getElementById("home-page-link")
 
 
 //event listeners
 function attachSearchArtClickEvent() {
     //attach event listener
-    searchArtLink().addEventListener("click",  renderSearchArtPage)
+    searchArtLink().addEventListener("click",  fetchArtWork)
+    searchArtLink2().addEventListener("mouseover", mouseOver)
 
 }
 
 function attachHomePageClickEvent() {
     //attach event listener
     homePageLink().addEventListener("click", renderHomePage)
-    
+
 }
 
 //event handlers
@@ -45,26 +47,37 @@ function renderHomePage() {
 
 }
 
-function renderSearchArtPage() {
+function renderSearchArtPage(artWork) {
     //create html elememts on search artworks page + render
       resetMainDiv();
    
       // creates element
-      const h1 = document.createElement("h1")
       const h3 = document.createElement("h3")
-      const h4 = document.createElement("h4")
+      const p = document.createElement("p")
+      
   
       //sets inner text of element
-      h1.innerText = "Artwork Title"
-      h3.innerText = "Artist Display Name"
-      h4.innerText = "Artist Display Bio"
+      h3.innerText = "Link to artwork image:"
+      p.innerText = artWork
+      
 
       //add element into mainDiv
-      mainDiv().appendChild(h1)
       mainDiv().appendChild(h3)
-      mainDiv().appendChild(h4)
+      mainDiv().appendChild(p)
+      
 
 }
+
+const fetchArtWork = () => {
+//fetch return promise and call it when we run respomse and then data
+fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/437133" )
+    .then(resp => resp.json())
+    .then(data => {
+        renderSearchArtPage(data.objectURL)
+    })
+
+}
+
 
 //helpers
 function resetMainDiv() {
