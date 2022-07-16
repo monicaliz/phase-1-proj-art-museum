@@ -8,15 +8,14 @@ Effect: render search home  page
 
 //NODE
 const mainDiv = () => document.getElementById("main")
-const searchArtLink = () => document.getElementById("search-art-link")
-const searchArtLink2 = () => document.getElementById("search-art-link-2")
+const likedArtWork = () => document.getElementById("liked-art-page-link")
 const homePageLink = () => document.getElementById("home-page-link")
 
 
 //event listeners
-function attachSearchArtClickEvent() {
+function attachLikedArtClickEvent() {
     //attach event listener
-    searchArtLink().addEventListener("click",  fetchArtWork)
+    likedArtLink().addEventListener("click",  )
 
 }
 
@@ -86,6 +85,6 @@ function resetMainDiv() {
 //DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
     renderHomePage();
-    attachSearchArtClickEvent();
+    attachLikedArtClickEvent();
     attachHomePageClickEvent();
 })
