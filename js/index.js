@@ -1,31 +1,48 @@
 /* 
-overall idea: homepage renders 4 img
+overall idea: add own post
 
-when: DOMContentLaded (e)
+when: sbmit (e)
 Cause: mouseClick (e)
-Effect: render search home  page
+Effect: patch to main div  container?
 */
 
-//NODE
+// JAVASCRIPT LOGIC FOR POSTS
+let cardPosts = [
+    {
+        name: "artwork title",
+        description: "artwork info"
+    },
+
+]
+
+// SELECTORS
 const mainDiv = () => document.getElementById("main")
-const likedArtWork = () => document.getElementById("liked-art-page-link")
 const homePageLink = () => document.getElementById("home-page-link")
+const myArtworksLink = () => document.getElementById("my-artworks-page-link")
 
+// FUNCTIONS
+const renderPost = cardPost => {
+    //render post to page
+    const col = document.createElement('div')
+    col.className = "col s12"
+    col.appendChild(createPost(cardPost))
 
-//event listeners
-function attachLikedArtClickEvent() {
-    //attach event listener
-    likedArtLink().addEventListener("click",  )
-
+    return col;
 }
 
-function attachHomePageClickEvent() {
-    //attach event listener
-    homePageLink().addEventListener("click", renderHomePage)
+const renderPosts = () => {
+    const row = document.createElement("row");
+    row.className = "row";
 
+    cardPosts.forEach(cardPost => {    
+        const col = renderPost(cardPost)
+        row.appendChild(col)
+        })
+
+        mainDiv().appendChild(row)
 }
 
-//event handlers
+//EVENT HANDLERS
 function renderHomePage() {
     //create html elememts on homepage + render
     resetMainDiv();
@@ -35,56 +52,88 @@ function renderHomePage() {
     const p = document.createElement("p")
 
     //sets inner text of element
-    h2.innerText = "Welcome to your Virtual Art Museum"
-    // p.innerText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut eu sem integer vitae justo. Et pharetra pharetra massa massa ultricies mi quis hendrerit dolor. Integer eget aliquet nibh praesent tristique magna sit amet purus. Ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan. Sem integer vitae justo eget. Libero nunc consequat interdum varius sit amet mattis vulputate. Commodo odio aenean sed adipiscing diam donec. Erat nam at lectus urna duis convallis convallis. Porttitor massa id neque aliquam vestibulum morbi blandit cursus. Fermentum iaculis eu non diam phasellus vestibulum lorem. Imperdiet proin fermentum leo vel orci porta non pulvinar. Dolor purus non enim praesent elementum. Proin nibh nisl condimentum id. Id faucibus nisl tincidunt eget nullam non nisi est sit."
+    h2.innerText = "Welcome to the Virtual Art Museum"
+    p.innerText = "phase 1 project by monica liz rodriguez"
+
+    //add element into mainDiv
+    mainDiv().appendChild(h2)
+    mainDiv().appendChild(p)
+}
+
+const renderMyArtWorksPage = (e) => {
+    // e.preventDefault();
+    
+    resetMainDiv();
+    
+    const h2 = document.createElement("h2")
+    const p = document.createElement("p")
+
+    //sets inner text of element
+    h2.innerText = "my artworks"
+    p.innerText = "these are cards that I submitted from the main gallery page"
 
     //add element into mainDiv
     mainDiv().appendChild(h2)
     mainDiv().appendChild(p)
 
+    renderPosts();
 
 }
 
-function renderSearchArtPage(artWork) {
-    //create html elememts on search artworks page + render
-      resetMainDiv();
-   
-      // creates element
-      const h3 = document.createElement("h3")
-      const p = document.createElement("p")
-      
-  
-      //sets inner text of element
-      h3.innerText = "Link to artwork image:"
-      p.innerText = artWork
-      
+// HELPERS
 
-      //add element into mainDiv
-      mainDiv().appendChild(h3)
-      mainDiv().appendChild(p)
-      
+const createPost= (cardPost) => {
+    const divCard = document.createElement('div')
+    const divCardContent = document.createElement('div')
+    const divCardAction = document.createElement('div')
+    const divImg = document.createElement('IMG')
+    const span = document.createElement('span')
+    const pDecriptiction = document.createElement('p')
+    const link1 = document.createElement('a')
+
+    divCard.className = "card"
+    divImg.className = "card-image"
+    span.className = "card-title"
+    divCardContent.className = "card-content"
+    divCardAction.className = "card-action"
+
+    divImg.setAttribute = ("src", "/artwork-images/sf-rlc-1975-1-879.jpeg")
+    link1.a = "#"
+
+    span.innerText = "new post"
+    pDecriptiction.innerHTML = "description"
+    link1.innerText = "artwork"
+
+    // divImg.appendChild("IMG")
+    divImg.appendChild(span)
+    divCardContent.appendChild(pDecriptiction)
+    divCardAction.appendChild(link1)
+
+    divCard.appendChild(divImg)
+    divCard.appendChild(divCardContent)
+    divCard.appendChild(divCardAction)
+
+    return divCard;
+}
+
+ const resetMainDiv = () => {
+     mainDiv().innerHTML = ""
+ }
+//event listeners
+function attachHomePageClickEvent() {
+    homePageLink().addEventListener("click", renderHomePage)
 
 }
 
-const fetchArtWork = () => {
-//fetch return promise and call it when we run respomse and then data
-fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/437133" )
-    .then(resp => resp.json())
-    .then(data => {
-        renderSearchArtPage(data.objectURL)
-    })
-
+function attachPostLinkEvent(){
+ myArtworksLink().addEventListener("click", renderMyArtWorksPage)
 }
 
-
-//helpers
-function resetMainDiv() {
-    mainDiv().innerHTML = " " 
-}
 
 //DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
     renderHomePage();
-    attachLikedArtClickEvent();
+    renderMyArtWorksPage();
+    attachPostLinkEvent();
     attachHomePageClickEvent();
 })
