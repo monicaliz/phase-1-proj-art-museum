@@ -21,17 +21,27 @@ I want to create an app where you can search art using subject keywords. I want 
 
 
 # 04. MVP
-* a user can search for art (submit -- post)
-* a user can see a list of results (DOMContentLoaded -- get)
-* A user can like art (click -- patch)
+* a user can see a a collection of cards displaying content (DOMContentLoaded -- get)
+* A user can click the main gallery link(click -- patch)
+* a user can comments on artworks
 
 form (commit) > submit event (commit) > list results (commit)
 
 # 05. stretch goals
-* Comments (submit -- post)
+* likes (submit -- post)
 * social media features - user accounts and profiles, user activity feed, follow other users, 
 
 # 06. to do
 1. create repo
-2. navigation
-3. homepage
+2. homepage -- 
+  a. add descriptive text to gallery cards
+  b. add input text box for comments and submit button (last event listener)
+  c. add a badge with comment icon to signify how many comments are on a card
+  d. ability to delete a comment
+  e. where will comments be stored? db.json
+  f. api intergration: review endpoints
+3. 30+ commits on github
+4. clean up readme
+5. video
+6. blog post
+
